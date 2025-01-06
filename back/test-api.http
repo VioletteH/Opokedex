@@ -1,0 +1,25 @@
+### récupération des pokemons
+GET http://localhost:3000/pokemons HTTP/1.1
+
+### récupération d'un pokemon
+GET http://localhost:3000/pokemons/1 HTTP/1.1
+
+### création d'un tache
+POST http://localhost:3000/tasks HTTP/1.1
+content-type: application/json
+
+{
+    "name": "new"
+}
+
+### modification d'un tache
+PATCH http://localhost:3000/tasks/5 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "new2"
+}
+
+### suppresion d'une tache
+DELETE http://localhost:3000/tasks/5 HTTP/1.1
+
