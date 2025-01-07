@@ -10,6 +10,12 @@ GET http://localhost:3000/types HTTP/1.1
 ### récupération des Pokemons d'un type
 GET http://localhost:3000/types/10 HTTP/1.1
 
+### récupération des teams
+GET http://localhost:3000/teams HTTP/1.1
+
+### récupération des Pokemons d'une team
+GET http://localhost:3000/teams/1 HTTP/1.1
+
 
 
 

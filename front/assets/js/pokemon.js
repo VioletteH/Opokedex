@@ -36,7 +36,7 @@ export async function fetchAndInsertPokemonCard() {
 
 export async function openPokemonModal(pokemonCard) {
     try {
-        const pokemonModal = document.querySelector(".modal");
+        const pokemonModal = document.querySelector("#pkm_detail");
         pokemonModal.classList.add("is-active");
 
         const pokemonId = pokemonCard.dataset.id;

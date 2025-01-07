@@ -1,5 +1,6 @@
 import * as pokemon from "./assets/js/pokemon.js";
 import * as type from "./assets/js/type.js";
+import * as team from "./assets/js/team.js";
 
 const page = document.querySelectorAll("a");
 const title = document.querySelector("h2");
@@ -20,6 +21,9 @@ async function init() {
       }else if(pageId === "nav-item-type") {
         title.textContent = "Types";
         await type.fetchAndInsertTypeButton();
+      }else if(pageId === "nav-item-team") {
+        title.textContent = "Teams";
+        await team.fetchAndInsertTeamSection();
       }
     })
   })

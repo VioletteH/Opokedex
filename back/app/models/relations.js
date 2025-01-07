@@ -17,11 +17,13 @@ Type.belongsToMany(Pokemon, {
 // pokemon - team MANY TO MANY
 Pokemon.belongsToMany(Team, {
     through: "team_pokemon",
-    foreignKey: "pokemon_id"
+    foreignKey: "pokemon_id",
+    as: "teams"
 });
 Team.belongsToMany(Pokemon, {
     through: "team_pokemon",
-    foreignKey: "team_id"
+    foreignKey: "team_id",
+    as: "pokemons"
 });
 
 export { Pokemon, Type, Team };
