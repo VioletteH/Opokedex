@@ -4,6 +4,16 @@ GET http://localhost:3000/pokemons HTTP/1.1
 ### récupération d'un pokemon
 GET http://localhost:3000/pokemons/1 HTTP/1.1
 
+### récupération des types
+GET http://localhost:3000/types HTTP/1.1
+
+### récupération des Pokemons d'un type
+GET http://localhost:3000/types/10 HTTP/1.1
+
+
+
+
+
 ### création d'un tache
 POST http://localhost:3000/tasks HTTP/1.1
 content-type: application/json

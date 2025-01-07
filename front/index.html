@@ -20,8 +20,8 @@
     <header class="my-5 my-6">
       <h1 class="title has-text-centered is-1">Pokedex</h1>
       <nav class="navbar is-flex is-justify-content-space-evenly" id="navbar_main" role="navigation" aria-label="main navigation">
-        <a class="navbar-item" id="nav-item-home" href="/pokemons"> Home </a>
-        <a class="navbar-item" id="nav-item-type"> Types </a>
+        <a class="navbar-item" id="nav-item-pokemon" href="#"> Pokemons </a>
+        <a class="navbar-item" id="nav-item-type" href="#"> Types </a>
         <a class="navbar-item" id="nav-item-team"> Teams </a>
         <a class="navbar-item" id="nav-item-add-team"> Add Team </a>
       </nav>
@@ -29,80 +29,92 @@
 
     <main id="app" class="container is-flex is-align-item-center is-flex-wrap-wrap is-justify-content-space-evenly my-6">
       
-      <template class="card-template">
-        <div class="card mb-6 has-text-centered pt-4 my-6">
-          <a>
-            <div class="card-image">
-              <img class="pkm_img" src="">
-            </div>
-            <div class="card-content">
-              <p></p>
-            </div>
-          </a>
-        </div>
-      </template>
+      <h2 class="title has-text-centered column is-full has-text-primary">Titre</h2>
 
-      <div class="modal" id="pkm_detail">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <h2 class="modal-card-title pkm_name"></h2>
-            <i class="fa fa-window-close close"></i>
-          </header>
-          <section class="modal-card-body is-flex is-flex-direction-row is-align-content-center is-align-items-center">
-            <div class="mr-4">
-              <img src="./assets/img/1.webp" class="pkm_img_modal">
-            </div>
-            <div class="modal-card-content pkm_stats_modal">
-              <h4 class="mb-4">Statistiques</h4>
-              <p class="modal_team_types"></p>
-              <div>
-                <div class="is-flex is-justify-content-space-start">
-                  <div class="">PV:</div>
-                  <div class="pokemon-hp ml-1"></div>
-                </div>
-                <progress class="progress is-danger progress-hp" value="50" max="255"></progress>
-              </div>
-              <div class="row">
-                <div class="is-flex is-justify-content-space-start">
-                  <div class="">Attaque:</div>
-                  <div class="pokemon-atk ml-1"></div>
-                </div>
-                <progress class="progress is-danger progress-atk" value="70" max="255"></progress>
-              </div>
-              <div class="row">
-                <div class="is-flex is-justify-content-space-start">
-                  <div class="">Défense:</div>
-                  <div class="pokemon-def ml-1"></div>
-                </div>
-                <progress class="progress is-danger progress-def" value="90" max="255"></progress>
-              </div>
-              <div class="row">
-                <div class="is-flex is-justify-content-space-start">
-                  <div class="">Attaque Spé:</div>
-                  <div class="pokemon-atk_spe ml-1"></div>
-                </div>
-                <progress class="progress is-danger progress-atk-spe" value="110" max="255"></progress>
-              </div>
-              <div class="row">
-                <div class="is-flex is-justify-content-space-start">
-                  <div class="">Défense Spé:</div>
-                  <div class="pokemon-def_spe ml-1"></div>
-                </div>
-                <progress class="progress is-danger progress-def-spe" value="130" max="255"></progress>
-              </div>
-              <div class="row">
-                <div class="is-flex is-justify-content-space-start">
-                  <div class="">Vitesse:</div>
-                  <div class="pokemon-speed ml-1"></div>
-                </div>
-                <progress class="progress is-danger progress-speed" value="150" max="255"></progress>
-              </div>
-            </div>
-          </section>
-        </div>
+      <div class="content">
+        
       </div>
 
+        <template class="card-template">
+          <div class="card mb-6 has-text-centered pt-4 my-6">
+            <a>
+              <div class="card-image">
+                <img class="pkm_img" src="">
+              </div>
+              <div class="card-content">
+                <p></p>
+              </div>
+            </a>
+          </div>
+        </template>
+  
+        <div class="modal" id="pkm_detail">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <h2 class="modal-card-title pkm_name"></h2>
+              <i class="fa fa-window-close close"></i>
+            </header>
+            <section class="modal-card-body is-flex is-flex-direction-row is-align-content-center is-align-items-center">
+              <div class="mr-4">
+                <img src="./assets/img/1.webp" class="pkm_img_modal">
+              </div>
+              <div class="modal-card-content pkm_stats_modal">
+                <h4 class="mb-4">Statistiques</h4>
+                <p class="modal_team_types"></p>
+                <div>
+                  <div class="is-flex is-justify-content-space-start">
+                    <div class="">PV:</div>
+                    <div class="pokemon-hp ml-1"></div>
+                  </div>
+                  <progress class="progress is-danger progress-hp" value="50" max="255"></progress>
+                </div>
+                <div class="row">
+                  <div class="is-flex is-justify-content-space-start">
+                    <div class="">Attaque:</div>
+                    <div class="pokemon-atk ml-1"></div>
+                  </div>
+                  <progress class="progress is-danger progress-atk" value="70" max="255"></progress>
+                </div>
+                <div class="row">
+                  <div class="is-flex is-justify-content-space-start">
+                    <div class="">Défense:</div>
+                    <div class="pokemon-def ml-1"></div>
+                  </div>
+                  <progress class="progress is-danger progress-def" value="90" max="255"></progress>
+                </div>
+                <div class="row">
+                  <div class="is-flex is-justify-content-space-start">
+                    <div class="">Attaque Spé:</div>
+                    <div class="pokemon-atk_spe ml-1"></div>
+                  </div>
+                  <progress class="progress is-danger progress-atk-spe" value="110" max="255"></progress>
+                </div>
+                <div class="row">
+                  <div class="is-flex is-justify-content-space-start">
+                    <div class="">Défense Spé:</div>
+                    <div class="pokemon-def_spe ml-1"></div>
+                  </div>
+                  <progress class="progress is-danger progress-def-spe" value="130" max="255"></progress>
+                </div>
+                <div class="row">
+                  <div class="is-flex is-justify-content-space-start">
+                    <div class="">Vitesse:</div>
+                    <div class="pokemon-speed ml-1"></div>
+                  </div>
+                  <progress class="progress is-danger progress-speed" value="150" max="255"></progress>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <template class="type-button-template">
+          <div class="is-flex is-justify-content-center" to-highlight>
+            <button class="button is-flex-grow-1 mx-2" style="background-color: #ff4422;">Feu</button>
+          </div>
+        </template>
+     
     </main>
 
     <script src="./app.js" type="module"></script>

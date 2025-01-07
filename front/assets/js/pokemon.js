@@ -1,4 +1,4 @@
-import {getPokemons, getPokemon} from "./api.js";
+import {getPokemons, getPokemon} from "./api/pokemon.api.js";
 
 export function insertPokemonCard(pokemon) {
     try{
@@ -17,7 +17,7 @@ export function insertPokemonCard(pokemon) {
       document.querySelector('.container').append(cloneTemplate);
 
     }catch(error) {
-      alert(error.message);
+      console.error(error.message);
     }
 }
     
@@ -30,7 +30,7 @@ export async function fetchAndInsertPokemonCard() {
       }
   
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
   };
 
@@ -71,7 +71,7 @@ export async function openPokemonModal(pokemonCard) {
             pokemonModal.classList.remove("is-active");
         });
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
 };
 
