@@ -1,4 +1,4 @@
-import {getTeams, getPokemonsByTeam, createTeam, updateTeam} from "./api/team.api.js";
+import {getTeams, getPokemonsByTeam, createTeam, deleteTeam, updateTeam, deletePokemonFromTeam} from "./api/team.api.js";
 
 export function insertTeamSection(team) {
     try{
@@ -45,9 +45,14 @@ export async function fetchAndInsertTeamSection() {
       const teamId = teamSection.dataset.id;
       const pokemons = await getPokemonsByTeam(teamId);
 
+      const originalFigure = imgContainer.querySelector("figure");
+      originalFigure.remove();
+
       for (let pokemon of pokemons){
-        const pokemonFigure = imgContainer.querySelector("figure");
-        const cloneFigure = pokemonFigure.cloneNode(true);
+        
+        const cloneFigure = originalFigure.cloneNode(true);
+
+        cloneFigure.dataset.id = pokemon.id;
         const pokemonImage = cloneFigure.querySelector(".image img");
         pokemonImage.src = `./assets/img/${pokemon.id}.webp`;
         imgContainer.append(cloneFigure);
@@ -70,17 +75,11 @@ export async function fetchAndInsertTeamSection() {
       const originalTr = table.querySelector("tr"); 
       originalTr.remove();
 
-      const editTeamButton = document.querySelector("#team_modal .edit");
-      editTeamButton.addEventListener("click", () => {
-        const editForm = document.querySelector("#team_modal-update");
-        editForm.classList.remove("is-hidden");
-        updateTeamForm(teamSection);
-      });
-
+      table.innerHTML = '';
       for (let pokemon of pokemons){
                 
         const cloneTr = originalTr.cloneNode(true);
-        
+        cloneTr.dataset.id = pokemon.id;
         cloneTr.querySelector("#numero").textContent = pokemon.hp;
         cloneTr.querySelector("#name").textContent = pokemon.name;
         cloneTr.querySelector("#hp").textContent = pokemon.hp;
@@ -93,12 +92,38 @@ export async function fetchAndInsertTeamSection() {
 
         table.append(cloneTr);
 
-      }
-  
-      const closeModal = document.querySelector("#team_modal .close");
-        closeModal.addEventListener("click", () => {
+        const deletePokemonBtn = cloneTr.querySelector(".fa-trash");
+        deletePokemonBtn.addEventListener("click", async () => {
+          const pokemonId = pokemon.id;
+          await deletePokemonFromTeam(teamId, pokemonId);
+          document.querySelector(`tr[data-id='${pokemonId}']`).remove(); 
+          document.querySelector(`figure[data-id='${pokemonId}']`).remove();
           teamModal.classList.remove("is-active");
         });
+
+      }
+  
+      const editTeamButton = document.querySelector("#team_modal .edit");
+        editTeamButton.addEventListener("click", () => {
+          const editForm = document.querySelector("#team_modal-update");
+          editForm.classList.remove("is-hidden");
+          updateTeamForm(teamSection);
+        });
+
+      const deleteTeamButton = document.querySelector("#team_modal .fa-trash");
+      deleteTeamButton.addEventListener("click", async () => {
+        const teamId = teamSection.dataset.id;
+        await deleteTeam(teamId);
+        document.querySelector(`section[data-id='${teamId}']`).remove();  
+        teamModal.classList.remove("is-active");
+      });
+
+      const closeModal = document.querySelectorAll("#team_modal .close");
+      for(let closebutton of closeModal){
+        closebutton.addEventListener("click", () => {
+          teamModal.classList.remove("is-active");
+        });
+      }
 
     } catch (error) {
         console.error(error.message);

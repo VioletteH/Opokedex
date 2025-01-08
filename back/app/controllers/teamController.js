@@ -41,6 +41,64 @@ const teamController = {
         } catch (error) {
             next(error);
         };
+    },
+
+    async deleteTeam(req, res, next){
+        try {
+            const teamId = req.params.id;
+            const team = await Team.findByPk(teamId);
+
+            await team.setPokemons([]);  // Dissocier tous les Pokémon de cette équipe
+
+            await team.destroy(); 
+            res.status(201).json(team);
+        } catch (error) {
+            next(error);
+        };
+    },
+
+    async updatePokemonInTeam(req, res, next){
+        try {
+            const teamId = req.params.teamid;
+            const pokemonId = req.params.pokemonid;
+            const team = await Team.findByPk(teamId);
+            const pokemon = await Pokemon.findByPk(pokemonId);
+
+            const isPokemonInTeam = await team.hasPokemon(pokemon);
+
+            if(isPokemonInTeam){
+                res.status(400).json({ message: "This pokemon is already in the team" });
+                return;
+            }else{
+                await team.addPokemon(pokemon);
+            }
+
+            res.status(200).json({message : "Pokemon added to the team", team, pokemon});
+        } catch (error) {
+            next(error);
+        };
+    },
+
+    async deletePokemonFromTeam(req, res, next){
+        try {
+            const teamId = req.params.teamid;
+            const pokemonId = req.params.pokemonid;
+            const team = await Team.findByPk(teamId);
+            const pokemon = await Pokemon.findByPk(pokemonId);
+
+            const isPokemonInTeam = await team.hasPokemon(pokemon);
+
+            if(!isPokemonInTeam){
+                res.status(400).json({ message: "This pokemon is not in the team" });
+                return;
+            }else{
+                await team.removePokemon(pokemon);
+            }
+
+            res.status(200).json({message : "Pokemon removed from the team", team, pokemon});
+        } catch (error) {
+            next(error);
+        };
     }
 };
 

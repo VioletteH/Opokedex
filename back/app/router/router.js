@@ -13,5 +13,8 @@ router.get("/teams", teamController.displayTeams);
 router.get("/teams/:id", teamController.displayPokemonsByTeam);
 router.post("/teams", teamController.createTeam);
 router.patch("/teams/:id", teamController.updateTeam);
+router.delete("/teams/:id", teamController.deleteTeam);
+router.put("/teams/:teamid/pokemons/:pokemonid", teamController.updatePokemonInTeam);
+router.delete("/teams/:teamid/pokemons/:pokemonid", teamController.deletePokemonFromTeam);
 
 export default router;

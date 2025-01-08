@@ -30,10 +30,9 @@
     <main id="app" class="container is-flex is-align-item-center is-flex-wrap-wrap is-justify-content-space-evenly my-6">
     </main>
 
-      <!--<h2 class="title has-text-centered column is-full has-text-primary">Bienvenue sur le Pokedex !</h2>-->
-
       <div class="content"></div>
 
+      <!-- CARTE POKEMON -->
         <template class="card-template">
           <div class="card mb-6 has-text-centered pt-4 my-6">
             <a>
@@ -47,6 +46,7 @@
           </div>
         </template>
   
+      <!-- MODALE POKEMON DETAILS-->
         <div class="modal" id="pkm_detail">
           <div class="modal-background"></div>
           <div class="modal-card">
@@ -109,9 +109,7 @@
               <div class="add_team_container">
                 <form id="form_add_pkm_team">
                   <select class="select">
-                    <option value="1">Team 1</option>
-                    <option value="2">Team 2</option>
-                    <option value="3">Team 3</option>
+                    <option value=""></option>
                   </select>
                   <button class="button btn_add_team">Add To Team</button>
                 </form>
@@ -123,14 +121,15 @@
           </div>
         </div>
 
+        <!-- BOUTON TYPES -->
         <template class="type-button-template">
           <div class="is-flex is-justify-content-center" to-highlight>
             <button class="button is-flex-grow-1 mx-2" style="background-color: #ff4422;">Feu</button>
           </div>
         </template>
      
+        <!-- CARTE EQUIPE -->
         <template class="team-template">
-
           <section class=" card container has-text-centered mb-6 py-4 my-6" to-highlight>
             <div class="mb-1">
               <h2 class="team-name title">My Great Team</h2>
@@ -138,16 +137,16 @@
             </div>
             <div class="imgContainer image is-flex is-justify-content-center my-5">
               <figure class="image is-64x64 mx-2">
-                <img src="./assets/img/1.webp" class="is-rounded">
+                <img src="" class="is-rounded">
               </figure>
             </div>
             <div class="container btnContainer">
               <button class="button btnModalTeam">Administrer</button>
             </div>
           </section>
-
         </template>
 
+        <!-- MODALE EQUIPE DETAILS -->
         <div class="modal" id="team_modal">
           <div class="modal-background"></div>
           <div class="modal-content">
@@ -177,6 +176,7 @@
                 <button id="team_modal-update-validate" class="button is-primary" type="submit">Valider</button>
               </form>
               <i class="fa fa-pencil edit mr-3"></i>
+              <i class="fa fa-trash mr-3"></i>
               <i class="fa fa-window-close close mr-3"></i>
             </header>
             <div class="modal-card-body">
@@ -219,6 +219,8 @@
             </footer>
           </div>
         </div>
+
+        <!-- MODALE AJOUT EQUIPE -->
 
         <div class="modal" id="add_team_modal">
           <div class="modal-background"></div>

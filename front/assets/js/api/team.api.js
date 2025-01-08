@@ -51,3 +51,40 @@ export const updateTeam = async (id, data) => {
         console.error(error);
     }
 };
+
+export const deleteTeam = async (id) => {
+    try{
+        const response = await fetch(`http://localhost:3000/teams/${id}`, {
+            method: "DELETE",
+          });
+        return response.json;
+    }catch(error){
+        console.error(error);
+    }
+};
+
+export const addPokemonInTeam = async (teamid, pokemonid) => {
+    try{
+        const response = await fetch(`http://localhost:3000/teams/${teamid}/pokemons/${pokemonid}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+          });
+          const updatedPokemonInTeam = await response.json();
+          return updatedPokemonInTeam;
+    }catch(error){
+        console.error(error);
+    }
+};
+
+export const deletePokemonFromTeam = async (teamid, pokemonid) => {
+    try{
+        const response = await fetch(`http://localhost:3000/teams/${teamid}/pokemons/${pokemonid}`, {
+            method: "DELETE"
+          });
+          return response.json;
+    }catch(error){
+        console.error(error);
+    }
+};

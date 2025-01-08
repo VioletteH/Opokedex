@@ -1,4 +1,5 @@
 import {getPokemons, getPokemon} from "./api/pokemon.api.js";
+import {getTeams, addPokemonInTeam} from "./api/team.api.js";
 
 export function insertPokemonCard(pokemon) {
     try{
@@ -42,36 +43,62 @@ export async function openPokemonModal(pokemonCard) {
         const pokemonId = pokemonCard.dataset.id;
         const pokemon = await getPokemon(pokemonId);
 
-        const pokemonModalName = document.querySelector(".modal-card-title");
-        pokemonModalName.textContent = pokemon.name;
+        document.querySelector(".modal-card-title").textContent = pokemon.name;
+        document.querySelector(".pkm_img_modal").src = `./assets/img/${pokemon.id}.webp`;
+        document.querySelector(".progress-hp").value = pokemon.hp;
+        document.querySelector(".progress-atk").value = pokemon.atk;
+        document.querySelector(".progress-def").value = pokemon.def;
+        document.querySelector(".progress-atk-spe").value = pokemon.atk_spe;
+        document.querySelector(".progress-def-spe").value = pokemon.def_spe;
+        document.querySelector(".progress-speed").value = pokemon.speed;
 
-        const pokemonModalImg = document.querySelector(".pkm_img_modal");
-        pokemonModalImg.src = `./assets/img/${pokemon.id}.webp`;
+        fetchAndInsertTeam();        
+        addPokemonToTeam(pokemonId);
 
-        const pokemonModalStatHp = document.querySelector(".progress-hp");
-        pokemonModalStatHp.value = pokemon.hp;
+        const closeModal = document.querySelectorAll("#pkm_detail .close");
+        for(let closebutton of closeModal){
+          closebutton.addEventListener("click", () => {
+              pokemonModal.classList.remove("is-active");
+          });
+        }
 
-        const pokemonModalStatAtk = document.querySelector(".progress-atk");
-        pokemonModalStatAtk.value = pokemon.atk;
-
-        const pokemonModalStatDef = document.querySelector(".progress-def");
-        pokemonModalStatDef.value = pokemon.def;
-
-        const pokemonModalStatAtkSpe = document.querySelector(".progress-atk-spe");
-        pokemonModalStatAtkSpe.value = pokemon.atk_spe;
-
-        const pokemonModalStatDefSpe = document.querySelector(".progress-def-spe");
-        pokemonModalStatDefSpe.value = pokemon.def_spe;
-
-        const pokemonModalStatSpeed = document.querySelector(".progress-speed");
-        pokemonModalStatSpeed.value = pokemon.speed;
-  
-        const closeModal = document.querySelector("#pkm_detail .close");
-        closeModal.addEventListener("click", () => {
-            pokemonModal.classList.remove("is-active");
-        });
     } catch (error) {
       console.error(error.message);
     }
 };
 
+export async function fetchAndInsertTeam() {
+  const teamSelect = document.querySelector("#form_add_pkm_team select"); 
+  const originalTeamOption = document.querySelector("#form_add_pkm_team select option"); 
+  originalTeamOption.remove();
+  teamSelect.innerHTML = '';
+  
+  const teams = await getTeams();
+
+  for(let team of teams){
+
+    const clonedTeamOption = originalTeamOption.cloneNode(true);
+    clonedTeamOption.value = team.id;
+    clonedTeamOption.textContent = team.name;
+    teamSelect.append(clonedTeamOption);
+  };   
+}
+
+export async function addPokemonToTeam(pokemonId) {
+  const teamSelect = document.querySelector("#form_add_pkm_team select"); 
+  let teamId = teamSelect.value;
+
+  teamSelect.addEventListener("change", function(e) {
+    e.preventDefault();
+    teamId = teamSelect.value;
+  });
+
+  const addPokemonButton = document.querySelector(".btn_add_team");
+  addPokemonButton.addEventListener("click", async function(e) {
+    e.preventDefault();
+    await addPokemonInTeam(teamId, pokemonId);
+    const pokemonModal = document.querySelector("#pkm_detail");
+    pokemonModal.classList.remove("is-active");
+  });
+
+};   
