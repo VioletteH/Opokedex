@@ -16,25 +16,25 @@ GET http://localhost:3000/teams HTTP/1.1
 ### récupération des Pokemons d'une team
 GET http://localhost:3000/teams/1 HTTP/1.1
 
-
-
-
-
-### création d'un tache
-POST http://localhost:3000/tasks HTTP/1.1
+### création d'une team
+POST http://localhost:3000/teams HTTP/1.1
 content-type: application/json
 
 {
     "name": "new"
 }
 
-### modification d'un tache
-PATCH http://localhost:3000/tasks/5 HTTP/1.1
+### modification d'une team
+PATCH http://localhost:3000/teams/5 HTTP/1.1
 content-type: application/json
 
 {
-    "name": "new2"
+    "name": "niouniou"
 }
+
+
+
+
 
 ### suppresion d'une tache
 DELETE http://localhost:3000/tasks/5 HTTP/1.1

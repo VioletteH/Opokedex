@@ -1,4 +1,4 @@
-import {getTeams, getPokemonsByTeam} from "./api/team.api.js";
+import {getTeams, getPokemonsByTeam, createTeam, updateTeam} from "./api/team.api.js";
 
 export function insertTeamSection(team) {
     try{
@@ -67,8 +67,15 @@ export async function fetchAndInsertTeamSection() {
       const pokemons = await getPokemonsByTeam(teamId);
 
       const table = document.querySelector("#tbody_team");
-      const originalTr = table.querySelector("tr"); // C'est la ligne modèle, elle sera supprimée
+      const originalTr = table.querySelector("tr"); 
       originalTr.remove();
+
+      const editTeamButton = document.querySelector("#team_modal .edit");
+      editTeamButton.addEventListener("click", () => {
+        const editForm = document.querySelector("#team_modal-update");
+        editForm.classList.remove("is-hidden");
+        updateTeamForm(teamSection);
+      });
 
       for (let pokemon of pokemons){
                 
@@ -98,3 +105,50 @@ export async function fetchAndInsertTeamSection() {
     }
   };
   
+  export async function openAddTeamModal() {
+    try {
+      const addTeamModal = document.querySelector("#add_team_modal");
+      addTeamModal.classList.add("is-active");
+
+      const form = document.querySelector("#form_team_modal");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = Object.fromEntries(new FormData(event.currentTarget));
+        const newTeam = await createTeam(formData);
+        insertTeamSection(newTeam);
+        addTeamModal.classList.remove("is-active");
+      });
+
+      const closeModal = document.querySelector("#add_team_modal .close");
+        closeModal.addEventListener("click", () => {
+          addTeamModal.classList.remove("is-active");
+        });
+      
+    }catch(error) {
+      console.error(error.message);
+    }
+  };
+
+  export async function updateTeamForm(teamSection) {
+    try {
+      const updateForm = document.querySelector("#team_modal-update");
+      const editTeamButtonOk = document.querySelector("#team_modal-update-validate");
+      editTeamButtonOk.addEventListener("click", async (e) => {
+        e.preventDefault();
+        
+        let formData = Object.fromEntries(new FormData(updateForm));
+        const teamId = teamSection.dataset.id;
+        formData = { 
+          name: formData.team_name,  
+          description: formData.team_description  
+        };
+        const updatedTeam = await updateTeam(teamId, formData);
+        document.querySelector(`section[data-id='${teamId}']`).remove(); 
+        insertTeamSection(updatedTeam);
+        updateForm.classList.add("is-hidden");
+      });
+
+    }catch(error) {
+      console.error(error.message);
+    }
+  };

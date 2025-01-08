@@ -21,7 +21,28 @@ const teamController = {
         } catch (error) {
             next(error);
         };
+    },
+
+    async createTeam(req, res, next){
+        try {
+            const team = await Team.create(req.body);
+            res.status(201).json(team);
+        } catch (error) {
+            next(error);
+        };
+    },
+
+    async updateTeam(req, res, next){
+        try {
+            const teamId = req.params.id;
+            const team = await Team.findByPk(teamId);
+            await team.update(req.body);
+            res.status(201).json(team);
+        } catch (error) {
+            next(error);
+        };
     }
 };
+
 
 export default teamController;

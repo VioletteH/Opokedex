@@ -28,8 +28,9 @@
     </header>
 
     <main id="app" class="container is-flex is-align-item-center is-flex-wrap-wrap is-justify-content-space-evenly my-6">
-      
-      <h2 class="title has-text-centered column is-full has-text-primary">Bienvenue sur le Pokedex !</h2>
+    </main>
+
+      <!--<h2 class="title has-text-centered column is-full has-text-primary">Bienvenue sur le Pokedex !</h2>-->
 
       <div class="content"></div>
 
@@ -104,6 +105,21 @@
                 </div>
               </div>
             </section>
+            <footer class="modal-card-foot is-flex">
+              <div class="add_team_container">
+                <form id="form_add_pkm_team">
+                  <select class="select">
+                    <option value="1">Team 1</option>
+                    <option value="2">Team 2</option>
+                    <option value="3">Team 3</option>
+                  </select>
+                  <button class="button btn_add_team">Add To Team</button>
+                </form>
+              </div>
+              <div class="buttons">
+                <button class="button close">Retour</button>
+              </div>
+            </footer>
           </div>
         </div>
 
@@ -135,17 +151,33 @@
         <div class="modal" id="team_modal">
           <div class="modal-background"></div>
           <div class="modal-content">
-            <header class="modal-card-head">
+            <header class="modal-card-head p-5">
               <h2 class="modal-card-title team_name"></h2>
-              <form class="hidden">
-                <input
-                  type="text"
-                  name="team_name"
-                  class="modal-card-title input_team_name mr-3"
-                />
+              <form id="team_modal-update" class="is-hidden">
+                <div class="is-flex">
+                  <div>
+                    <label for="team-name">Name</label>
+                    <input
+                      type="text"
+                      name="team_name"
+                      id="team-name"
+                      class="modal-card-title input_team_name mr-3 mb-3"
+                    />
+                  </div>
+                  <div>
+                      <label for="team-description">Description</label>
+                      <input
+                        type="text"
+                        name="team_description"
+                        id="team-description"
+                        class="modal-card-title input_team_description mr-3 mb-3"
+                      />
+                  </div>
+                </div>
+                <button id="team_modal-update-validate" class="button is-primary" type="submit">Valider</button>
               </form>
               <i class="fa fa-pencil edit mr-3"></i>
-              <i class="fa fa-window-close close"></i>
+              <i class="fa fa-window-close close mr-3"></i>
             </header>
             <div class="modal-card-body">
               <p class="team_description"></p>
@@ -165,7 +197,6 @@
                   </tr>
                 </thead>
                 <tbody id="tbody_team">
-                  <!-- TODO: A dynamiser -->
                   <tr>
                     <td id="numero"></td>
                     <td id="name"></td>
@@ -178,7 +209,6 @@
                     <td id="types"></td>
                     <td><i class="fa fa-trash"></i></td>
                   </tr>
-                  <!-- END A dynamiser  -->
                 </tbody>
               </table>
             </div>
@@ -190,7 +220,44 @@
           </div>
         </div>
 
-    </main>
+        <div class="modal" id="add_team_modal">
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <header class="modal-card-head">
+              <h2 class="modal-card-title team_name">Ajouter une team</h2>
+              <i class="fa fa-window-close close"></i>
+            </header>
+            <div class="modal-card-body">
+              <form id="form_team_modal">
+                <div class="field">
+                  <label class="label">Name</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      name="name"
+                      placeholder="Name of the the team"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Description</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      name="description"
+                      placeholder="Facultatif"
+                    />
+                  </div>
+                </div>
+                <div class="control">
+                  <button class="button is-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
 
     <script src="./app.js" type="module"></script>
   </body>

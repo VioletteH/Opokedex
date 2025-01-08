@@ -19,3 +19,35 @@ export const getPokemonsByTeam = async (id) => {
         throw new Error("Base de données indisponible");
     }
 };
+
+export const createTeam = async (data) => {
+    try{
+        const response = await fetch("http://localhost:3000/teams", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+          });
+          const newTeam = await response.json();
+          return newTeam;
+    }catch(error){
+        console.error(error);
+    }
+};
+
+export const updateTeam = async (id, data) => {
+    try{
+        const response = await fetch(`http://localhost:3000/teams/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+          });
+          const updatedTeam = await response.json();
+          return updatedTeam;
+    }catch(error){
+        console.error(error);
+    }
+};
