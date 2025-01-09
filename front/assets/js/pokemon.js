@@ -1,4 +1,4 @@
-import {getPokemons, getPokemon} from "./api/pokemon.api.js";
+import {getPokemons, getPokemon, getPokemonBySearchTerm} from "./api/pokemon.api.js";
 import {getTeams, addPokemonInTeam} from "./api/team.api.js";
 
 export function insertPokemonCard(pokemon) {
@@ -20,7 +20,7 @@ export function insertPokemonCard(pokemon) {
     }catch(error) {
       console.error(error.message);
     }
-}
+};
     
 export async function fetchAndInsertPokemonCard() {
     try {
@@ -33,7 +33,7 @@ export async function fetchAndInsertPokemonCard() {
     } catch (error) {
       console.error(error.message);
     }
-  };
+};
 
 export async function openPokemonModal(pokemonCard) {
     try {
@@ -82,7 +82,7 @@ export async function fetchAndInsertTeam() {
     clonedTeamOption.textContent = team.name;
     teamSelect.append(clonedTeamOption);
   };   
-}
+};
 
 export async function addPokemonToTeam(pokemonId) {
   const teamSelect = document.querySelector("#form_add_pkm_team select"); 
@@ -102,3 +102,34 @@ export async function addPokemonToTeam(pokemonId) {
   });
 
 };   
+
+export async function openPokemonModalBySearchTerm() {
+  try{
+        const pokemonModal = document.querySelector("#pkm_detail");
+        pokemonModal.classList.add("is-active");
+
+        const pokemon = await getPokemonBySearchTerm();
+        const pokemonId = pokemon.id;
+        document.querySelector(".modal-card-title").textContent = pokemon.name;
+        document.querySelector(".pkm_img_modal").src = `./assets/img/${pokemon.id}.webp`;
+        document.querySelector(".progress-hp").value = pokemon.hp;
+        document.querySelector(".progress-atk").value = pokemon.atk;
+        document.querySelector(".progress-def").value = pokemon.def;
+        document.querySelector(".progress-atk-spe").value = pokemon.atk_spe;
+        document.querySelector(".progress-def-spe").value = pokemon.def_spe;
+        document.querySelector(".progress-speed").value = pokemon.speed;
+
+        fetchAndInsertTeam();        
+        addPokemonToTeam(pokemonId);
+
+        const closeModal = document.querySelectorAll("#pkm_detail .close");
+        for(let closebutton of closeModal){
+          closebutton.addEventListener("click", () => {
+              pokemonModal.classList.remove("is-active");
+          });
+        }
+
+  }catch(error) {
+    console.error(error.message);
+  }
+};

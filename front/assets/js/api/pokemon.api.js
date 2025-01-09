@@ -19,3 +19,15 @@ export const getPokemon = async (id) => {
         throw new Error("Base de données indisponible");
     }
 };
+
+export const getPokemonBySearchTerm = async () => {
+    try{
+        const name = document.getElementById("search").value;
+        const response = await fetch(`http://localhost:3000/pokemons?searchTerm=${name}`);
+        const pokemon = await response.json();     
+        return pokemon[0]; 
+    }catch(error){
+        console.error(error);
+        throw new Error("Base de données indisponible");
+    }
+};

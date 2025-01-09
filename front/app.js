@@ -1,9 +1,11 @@
 import * as pokemon from "./assets/js/pokemon.js";
 import * as type from "./assets/js/type.js";
 import * as team from "./assets/js/team.js";
+import { openPokemonModalBySearchTerm } from "./assets/js/pokemon.js";
 
 const page = document.querySelectorAll("a");
 let container = document.querySelector(".container");
+const searchFormElement = document.querySelector('#search-form');   
 
 container.innerHTML = `<h2 class="title has-text-centered column is-full has-text-primary">Bienvenue sur le Pokedex !</h2>`;
 
@@ -30,6 +32,11 @@ async function init() {
       }
     })
   })
+  
+  searchFormElement.addEventListener("submit", (e) => {
+    e.preventDefault();
+      openPokemonModalBySearchTerm();
+  });
   
 }
 
