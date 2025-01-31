@@ -5,7 +5,7 @@ import { Team } from "./teamModel.js";
 // pokemon - type MANY TO MANY
 Pokemon.belongsToMany(Type, {
     through: "pokemon_type",
-    foreignKey: "pokemon_id", // table en cours
+    foreignKey: "pokemon_id", 
     as: "types"
 });
 Type.belongsToMany(Pokemon, {

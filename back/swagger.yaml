@@ -1,0 +1,253 @@
+openapi: 3.0.0
+info:
+  title: Pokémon API
+  version: 1.0.0
+  description: API pour gérer les Pokémons, les types et les équipes
+
+paths:
+  /pokemons:
+    get:
+      summary: Récupérer la liste de tous les Pokémons
+      responses:
+        200:
+          description: Liste des Pokémons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pokemon'
+
+  /pokemons/{id}:
+    get:
+      summary: Récupérer un Pokémon par son ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID du Pokémon à récupérer
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Détails du Pokémon
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+        404:
+          description: Pokémon non trouvé
+
+  /types:
+    get:
+      summary: Récupérer la liste de tous les types de Pokémon
+      responses:
+        200:
+          description: Liste des types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Type'
+
+  /types/{id}:
+    get:
+      summary: Récupérer tous les Pokémons d'un type donné
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID du type de Pokémon
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Liste des Pokémons du type spécifié
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pokemon'
+        404:
+          description: Type non trouvé
+
+  /teams:
+    get:
+      summary: Récupérer la liste des équipes
+      responses:
+        200:
+          description: Liste des équipes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+    post:
+      summary: Créer une nouvelle équipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        201:
+          description: Équipe créée avec succès
+        400:
+          description: Mauvaise requête
+
+  /teams/{id}:
+    get:
+      summary: Récupérer les Pokémons d'une équipe par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de l'équipe
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Liste des Pokémons dans l'équipe
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pokemon'
+        404:
+          description: Équipe non trouvée
+
+    patch:
+      summary: Mettre à jour une équipe par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de l'équipe à mettre à jour
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        200:
+          description: Équipe mise à jour
+        400:
+          description: Mauvaise requête
+        404:
+          description: Équipe non trouvée
+
+    delete:
+      summary: Supprimer une équipe par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de l'équipe à supprimer
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Équipe supprimée avec succès
+        404:
+          description: Équipe non trouvée
+
+  /teams/{teamid}/pokemons/{pokemonid}:
+    put:
+      summary: Ajouter ou mettre à jour un Pokémon dans une équipe
+      parameters:
+        - name: teamid
+          in: path
+          required: true
+          description: ID de l'équipe
+          schema:
+            type: integer
+        - name: pokemonid
+          in: path
+          required: true
+          description: ID du Pokémon à ajouter ou mettre à jour
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Pokémon mis à jour dans l'équipe
+        404:
+          description: Équipe ou Pokémon non trouvé
+
+    delete:
+      summary: Retirer un Pokémon d'une équipe
+      parameters:
+        - name: teamid
+          in: path
+          required: true
+          description: ID de l'équipe
+          schema:
+            type: integer
+        - name: pokemonid
+          in: path
+          required: true
+          description: ID du Pokémon à retirer
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Pokémon retiré de l'équipe
+        404:
+          description: Équipe ou Pokémon non trouvé
+
+components:
+  schemas:
+    Pokemon:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        hp:
+          type: integer
+        atk:
+          type: integer
+        def:
+          type: integer
+        atk_spe:
+          type: integer
+        def_spe:
+          type: integer
+        speed:
+          type: integer
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/Type'
+
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        pokemons:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pokemon'
+
+    Type:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        color:
+          type: string

@@ -4,28 +4,20 @@ import { Op } from 'sequelize';
 const homeController = {
 
     async displayPokemons(req, res, next){
-        try {
-            const query = req.query.searchTerm;
-            if(query){
-                const pokemons = await Pokemon.findAll({where: { name: {[Op.iLike]: `%${query}%`}}});
-                res.status(200).json(pokemons);
-            }else{
-                const pokemons = await Pokemon.findAll();
-                res.status(200).json(pokemons);
-            }
-        } catch (error) {
-            next(error);
-        };
+        const query = req.query.searchTerm;
+        if(query){
+            const pokemons = await Pokemon.findAll({where: { name: {[Op.iLike]: `%${query}%`}}});
+            res.status(200).json(pokemons);
+        }else{
+            const pokemons = await Pokemon.findAll();
+            res.status(200).json(pokemons);
+        }
     },
 
     async displayPokemon(req, res, next){
-        try {
-            const id = req.params.id;
-            const pokemon = await Pokemon.findByPk(id);
-            res.status(200).json(pokemon);
-        } catch (error) {
-            next(error);
-        };
+        const id = req.params.id;
+        const pokemon = await Pokemon.findByPk(id);
+        res.status(200).json(pokemon);
     }
 };
 

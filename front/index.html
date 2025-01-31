@@ -5,32 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pokedex</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='24px' height='24px' stroke-width='1.5' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' color='%23000000'%3E%3Cpath d='M3 3.6V20.4C3 20.7314 3.26863 21 3.6 21H20.4C20.7314 21 21 20.7314 21 20.4V3.6C21 3.26863 20.7314 3 20.4 3H3.6C3.26863 3 3 3.26863 3 3.6Z' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3Cpath d='M6 6L6 16' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3Cpath d='M10 6V9' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3Cpath d='M14 6V13' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3Cpath d='M18 6V11' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/svg%3E"/>
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-    <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"/>
-
-    <!-- Custom CSS-->
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
 
   <body>
+
     <header class="my-5 my-6">
       <h1 class="title has-text-centered is-1">Pokedex</h1>
       <nav class="navbar is-flex is-justify-content-space-evenly" id="navbar_main" role="navigation" aria-label="main navigation">
-        <a class="navbar-item" id="nav-item-pokemon" href="#"> Pokemons </a>
+        <a class="navbar-item" id="nav-item-pokedex" href="#"> Pokedex </a>
         <a class="navbar-item" id="nav-item-type" href="#"> Types </a>
-        <a class="navbar-item" id="nav-item-team" href="#"> Teams </a>
-        <a class="navbar-item" id="nav-item-add-team"> Add Team </a>
+        <a class="navbar-item" id="nav-item-team" href="#"> Equipes </a>
+        <a class="navbar-item" id="nav-item-add-team"> Ajouter une équipe </a>
         <form class="navbar-item" id="search-form" action="" method="GET">
           <label for="search">Recherche</label>
           <input type="text" id="search" name="search" value="">
           <button class="button is-primary is-small" type="submit">OK</button>
       </form>
       </nav>
-      
     </header>
 
     <main id="app" class="container is-flex is-align-item-center is-flex-wrap-wrap is-justify-content-space-evenly my-6">
@@ -54,7 +48,7 @@
   
       <!-- MODALE POKEMON DETAILS-->
         <div class="modal" id="pkm_detail">
-          <div class="modal-background"></div>
+          <div class="modal-background close"></div>
           <div class="modal-card">
             <header class="modal-card-head">
               <h2 class="modal-card-title pkm_name"></h2>
@@ -62,7 +56,7 @@
             </header>
             <section class="modal-card-body is-flex is-flex-direction-row is-align-content-center is-align-items-center">
               <div class="mr-4">
-                <img src="./assets/img/1.webp" class="pkm_img_modal">
+                <img src="" class="pkm_img_modal">
               </div>
               <div class="modal-card-content pkm_stats_modal">
                 <h4 class="mb-4">Statistiques</h4>
@@ -72,42 +66,42 @@
                     <div class="">PV:</div>
                     <div class="pokemon-hp ml-1"></div>
                   </div>
-                  <progress class="progress is-danger progress-hp" value="50" max="255"></progress>
+                  <progress class="progress is-danger progress-hp" value="" max="255"></progress>
                 </div>
                 <div class="row">
                   <div class="is-flex is-justify-content-space-start">
                     <div class="">Attaque:</div>
                     <div class="pokemon-atk ml-1"></div>
                   </div>
-                  <progress class="progress is-danger progress-atk" value="70" max="255"></progress>
+                  <progress class="progress is-danger progress-atk" value="" max="255"></progress>
                 </div>
                 <div class="row">
                   <div class="is-flex is-justify-content-space-start">
                     <div class="">Défense:</div>
                     <div class="pokemon-def ml-1"></div>
                   </div>
-                  <progress class="progress is-danger progress-def" value="90" max="255"></progress>
+                  <progress class="progress is-danger progress-def" value="" max="255"></progress>
                 </div>
                 <div class="row">
                   <div class="is-flex is-justify-content-space-start">
                     <div class="">Attaque Spé:</div>
                     <div class="pokemon-atk_spe ml-1"></div>
                   </div>
-                  <progress class="progress is-danger progress-atk-spe" value="110" max="255"></progress>
+                  <progress class="progress is-danger progress-atk-spe" value="" max="255"></progress>
                 </div>
                 <div class="row">
                   <div class="is-flex is-justify-content-space-start">
                     <div class="">Défense Spé:</div>
                     <div class="pokemon-def_spe ml-1"></div>
                   </div>
-                  <progress class="progress is-danger progress-def-spe" value="130" max="255"></progress>
+                  <progress class="progress is-danger progress-def-spe" value="" max="255"></progress>
                 </div>
                 <div class="row">
                   <div class="is-flex is-justify-content-space-start">
                     <div class="">Vitesse:</div>
                     <div class="pokemon-speed ml-1"></div>
                   </div>
-                  <progress class="progress is-danger progress-speed" value="150" max="255"></progress>
+                  <progress class="progress is-danger progress-speed" value="" max="255"></progress>
                 </div>
               </div>
             </section>
@@ -117,7 +111,7 @@
                   <select class="select">
                     <option value=""></option>
                   </select>
-                  <button class="button btn_add_team">Add To Team</button>
+                  <button class="button btn_add_team">Ajouter à l'équipe</button>
                 </form>
               </div>
               <div class="buttons">
@@ -148,20 +142,21 @@
             </div>
             <div class="container btnContainer">
               <button class="button btnModalTeam">Administrer</button>
+              <button class="button btnAddPokemon">Ajouter un pokemon</button>
             </div>
           </section>
         </template>
 
         <!-- MODALE EQUIPE DETAILS -->
         <div class="modal" id="team_modal">
-          <div class="modal-background"></div>
+          <div class="modal-background close"></div>
           <div class="modal-content">
             <header class="modal-card-head p-5">
-              <h2 class="modal-card-title team_name"></h2>
+              <h2 class="modal-card-title team-name"></h2>
               <form id="team_modal-update" class="is-hidden">
                 <div class="is-flex">
                   <div>
-                    <label for="team-name">Name</label>
+                    <label for="team-name">CNm</label>
                     <input
                       type="text"
                       name="team_name"
@@ -180,6 +175,7 @@
                   </div>
                 </div>
                 <button id="team_modal-update-validate" class="button is-primary" type="submit">Valider</button>
+                <button id="team_modal-update-close" class="button is-primary close" type="button">Annuler</button>
               </form>
               <i class="fa fa-pencil edit mr-3"></i>
               <i class="fa fa-trash mr-3"></i>
@@ -191,7 +187,7 @@
                 <thead>
                   <tr>
                     <th><abbr title="numero">N°</abbr></th>
-                    <th><abbr title="name">Name</abbr></th>
+                    <th><abbr title="name">Nom</abbr></th>
                     <th><abbr title="hp">PV</abbr></th>
                     <th><abbr title="atk">Atk</abbr></th>
                     <th><abbr title="def">Def</abbr></th>
@@ -227,18 +223,17 @@
         </div>
 
         <!-- MODALE AJOUT EQUIPE -->
-
         <div class="modal" id="add_team_modal">
-          <div class="modal-background"></div>
+          <div class="modal-background close"></div>
           <div class="modal-content">
             <header class="modal-card-head">
-              <h2 class="modal-card-title team_name">Ajouter une team</h2>
+              <h2 class="modal-card-title team_name">Ajouter une équipe</h2>
               <i class="fa fa-window-close close"></i>
             </header>
             <div class="modal-card-body">
               <form id="form_team_modal">
                 <div class="field">
-                  <label class="label">Name</label>
+                  <label class="label">Nom</label>
                   <div class="control">
                     <input
                       class="input"
@@ -260,7 +255,7 @@
                   </div>
                 </div>
                 <div class="control">
-                  <button class="button is-primary">Submit</button>
+                  <button class="button is-primary">Valider</button>
                 </div>
               </form>
             </div>

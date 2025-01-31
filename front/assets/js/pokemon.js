@@ -1,11 +1,11 @@
 import {getPokemons, getPokemon, getPokemonBySearchTerm} from "./api/pokemon.api.js";
 import {getTeams, addPokemonInTeam} from "./api/team.api.js";
 
-export function insertPokemonCard(pokemon) {
+export function insertPokemonCard(pokemon, container) {
     try{
       const cardTemplate = document.querySelector('.card-template');
       const cloneTemplate = cardTemplate.content.cloneNode(true);
-  
+
       const pokemonCard = cloneTemplate.querySelector('.card');
       pokemonCard.dataset.id = pokemon.id;
       pokemonCard.querySelector('.card-image .pkm_img').src = `./assets/img/${pokemon.id}.webp`;
@@ -15,7 +15,7 @@ export function insertPokemonCard(pokemon) {
         openPokemonModal(pokemonCard);
       });
 
-      document.querySelector('.container').append(cloneTemplate);
+      container.append(cloneTemplate);
 
     }catch(error) {
       console.error(error.message);
@@ -25,9 +25,10 @@ export function insertPokemonCard(pokemon) {
 export async function fetchAndInsertPokemonCard() {
     try {
       const pokemons = await getPokemons();
-  
+      const container = document.querySelector(".container");
+      
       for(let pokemon of pokemons){
-        insertPokemonCard(pokemon);
+        insertPokemonCard(pokemon, container);
       }
   
     } catch (error) {
@@ -55,9 +56,9 @@ export async function openPokemonModal(pokemonCard) {
         fetchAndInsertTeam();        
         addPokemonToTeam(pokemonId);
 
-        const closeModal = document.querySelectorAll("#pkm_detail .close");
-        for(let closebutton of closeModal){
-          closebutton.addEventListener("click", () => {
+        const closeModalButtons = document.querySelectorAll("#pkm_detail .close");
+        for(let closeModalButton of closeModalButtons){
+          closeModalButton.addEventListener("click", () => {
               pokemonModal.classList.remove("is-active");
           });
         }
@@ -109,7 +110,7 @@ export async function openPokemonModalBySearchTerm() {
         pokemonModal.classList.add("is-active");
 
         const pokemon = await getPokemonBySearchTerm();
-        const pokemonId = pokemon.id;
+
         document.querySelector(".modal-card-title").textContent = pokemon.name;
         document.querySelector(".pkm_img_modal").src = `./assets/img/${pokemon.id}.webp`;
         document.querySelector(".progress-hp").value = pokemon.hp;
@@ -120,11 +121,11 @@ export async function openPokemonModalBySearchTerm() {
         document.querySelector(".progress-speed").value = pokemon.speed;
 
         fetchAndInsertTeam();        
-        addPokemonToTeam(pokemonId);
+        addPokemonToTeam(pokemon.id);
 
-        const closeModal = document.querySelectorAll("#pkm_detail .close");
-        for(let closebutton of closeModal){
-          closebutton.addEventListener("click", () => {
+        const closeModalButtons = document.querySelectorAll("#pkm_detail .close");
+        for(let closeModalButton of closeModalButtons){
+          closeModalButton.addEventListener("click", () => {
               pokemonModal.classList.remove("is-active");
           });
         }
@@ -133,3 +134,4 @@ export async function openPokemonModalBySearchTerm() {
     console.error(error.message);
   }
 };
+

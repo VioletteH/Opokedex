@@ -1,6 +1,9 @@
+const apiBaseUrl = "http://localhost:3000";
+
 export const getTypes = async () => {
     try{
-        const response = await fetch("http://localhost:3000/types");
+        const response = await fetch(`${apiBaseUrl}/types`);
+        if (!response.ok) return null;
         const types = await response.json();      
         return types; 
     }catch(error){
@@ -11,7 +14,8 @@ export const getTypes = async () => {
 
 export const getPokemonsByType = async (id) => {
     try{
-        const response = await fetch(`http://localhost:3000/types/${id}`);
+        const response = await fetch(`${apiBaseUrl}/types/${id}`);
+        if (!response.ok) return null;
         const pokemonsByType = await response.json();      
         return pokemonsByType; 
     }catch(error){

@@ -1,6 +1,9 @@
+const apiBaseUrl = "http://localhost:3000";
+
 export const getPokemons = async () => {
     try{
-        const response = await fetch("http://localhost:3000/pokemons");
+        const response = await fetch(`${apiBaseUrl}/pokemons`);
+        if (!response.ok) return null;
         const pokemons = await response.json();      
         return pokemons; 
     }catch(error){
@@ -11,7 +14,8 @@ export const getPokemons = async () => {
 
 export const getPokemon = async (id) => {
     try{
-        const response = await fetch(`http://localhost:3000/pokemons/${id}`);
+        const response = await fetch(`${apiBaseUrl}/pokemons/${id}`);
+        if (!response.ok) return null;
         const pokemon = await response.json();      
         return pokemon; 
     }catch(error){
@@ -23,7 +27,8 @@ export const getPokemon = async (id) => {
 export const getPokemonBySearchTerm = async () => {
     try{
         const name = document.getElementById("search").value;
-        const response = await fetch(`http://localhost:3000/pokemons?searchTerm=${name}`);
+        const response = await fetch(`${apiBaseUrl}/pokemons?searchTerm=${name}`);
+        if (!response.ok) return null;
         const pokemon = await response.json();     
         return pokemon[0]; 
     }catch(error){

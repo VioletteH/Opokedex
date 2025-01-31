@@ -14,7 +14,7 @@ GET http://localhost:3000/types/10 HTTP/1.1
 GET http://localhost:3000/teams HTTP/1.1
 
 ### récupération des Pokemons d'une team
-GET http://localhost:3000/teams/13 HTTP/1.1
+GET http://localhost:3000/teams/2 HTTP/1.1
 
 ### création d'une team
 POST http://localhost:3000/teams HTTP/1.1
@@ -36,10 +36,10 @@ content-type: application/json
 DELETE http://localhost:3000/teams/7 HTTP/1.1
 
 ### ajout d'un Pokemon dans une team
-PUT http://localhost:3000/teams/4/pokemons/5 HTTP/1.1
+PUT http://localhost:3000/teams/4/pokemons/10 HTTP/1.1
 
 ### suppression d'un Pokemon d'une team
-DELETE http://localhost:3000/teams/13/pokemons/3 HTTP/1.1
+DELETE http://localhost:3000/teams/2/pokemons/20 HTTP/1.1
 
 ### recherche d'un Pokemon via le moteur de recherche
 GET http://localhost:3000/pokemons?searchTerm=Herbizarre HTTP/1.1
