@@ -21,6 +21,14 @@ app.use((req, res) => {
     res.send("Not Found"); 
 });
 
-app.listen(PORT, () => { 
-    console.log(`Example app listening on port ${PORT}`); 
-}); 
+// app.listen(PORT, () => { 
+//     console.log(`Example app listening on port ${PORT}`); 
+// }); 
+
+if (process.env.NODE_ENV !== 'test') { 
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}
+
+export default app;

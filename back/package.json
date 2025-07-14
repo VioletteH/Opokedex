@@ -4,11 +4,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch index.js",
-    "db:create": "node data/create_tables.sql",
-    "db:seed": "node data/seeding_tables.sql",
-    "db:reset": "npm run db:create && npm run db:seed"
+    "db:create": "psql -U $DB_USER -d $DB_NAME -f data/create_tables.sql",
+    "db:seed": "psql -U $DB_USER -d $DB_NAME -f data/seeding_tables.sql",
+    "db:reset": "npm run db:create && npm run db:seed",
+    "test:reset": "psql -U opokedex -d opokedex_test -f data/create_tables.sql && psql -U opokedex -d opokedex_test -f data/seeding_tables.sql",
+    "pretest": "npm run test:reset",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +24,12 @@
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
-    "eslint": "^9.6.0"
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "babel-jest": "^30.0.4",
+    "babel-plugin-transform-import-meta": "^2.3.3",
+    "eslint": "^9.6.0",
+    "jest": "^30.0.4",
+    "supertest": "^7.1.3"
   }
 }

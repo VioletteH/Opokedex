@@ -9,6 +9,12 @@ const typeController = {
 
     async displayPokemonsByType(req, res, next){
         const typeId = req.params.id
+        const type = await Type.findByPk(typeId);
+
+        if (!type) {
+            return res.status(404).json({ error: `Type avec l'ID ${typeId} non trouvé.` });
+        }
+
         const pokemons = await Pokemon.findAll({
                 include: [{ model: Type, as: "types", where: { id: typeId } }]
         });

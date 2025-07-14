@@ -8,9 +8,16 @@ Team.init(
     name: {
       type: DataTypes.TEXT,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+        len: [2, 100] 
+      }
     },
     description: {
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        validate: {
+          len: [2, 255] 
+        }
     }
   },
   {
