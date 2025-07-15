@@ -51,3 +51,4 @@ Ce qui a été réalisé sur ce projet
 Swagger API disponible sur https://app.swaggerhub.com/apis-docs/VioletteHenquet/pokemon-api/1.0.0#/ 
 
 
+npx jest tests/team.test.js --runInBand --detectOpenHandles 
