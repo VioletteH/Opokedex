@@ -4,7 +4,6 @@ import app from "../index.js";
 describe("GET /pokemons", () => {
   it("doit retourner un tableau de pokemons", async () => {
     const res = await request(app).get("/pokemons");
-
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
     expect(res.body.length).toBeGreaterThan(0);

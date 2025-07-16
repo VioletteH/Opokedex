@@ -15,9 +15,8 @@ describe("GET /types/:id", () => {
   it("doit retourner un tableau de pokemons associés au type existant", async () => {
     const res = await request(app).get("/types/1");
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("id", 1);
-    // expect(Array.isArray(res.body)).toBe(true); 
-    // expect(res.body.length).toBeGreaterThan(0);
+    expect(Array.isArray(res.body)).toBe(true); 
+    expect(res.body.length).toBeGreaterThan(0);
   });
 
   it("doit retourner 404 pour un type inexistant", async () => {

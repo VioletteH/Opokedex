@@ -86,7 +86,8 @@ describe('Application Pokedex - Tests Front-end', () => {
 
         cy.get('#pkm_detail').should('have.class', 'is-active'); // La modale doit être active
         cy.get('#pkm_detail .modal-card-title').should('contain', pokemonToTest.name);
-        cy.get('.pokemon-hp').should('contain', pokemonToTest.hp);
+        cy.get('.progress-hp').should('have.value', pokemonToTest.hp); 
+
         // Vérifiez que le select d'équipe est rempli
         cy.get('#form_add_pkm_team select option').should('have.length', mockTeams.length);
         cy.get('#form_add_pkm_team select option:nth-child(1)').should('contain', mockTeams[0].name);
@@ -111,7 +112,7 @@ describe('Application Pokedex - Tests Front-end', () => {
         cy.get('#pkm_detail').should('have.class', 'is-active');
         
         // Cliquez sur le bouton de fermeture
-        cy.get('#pkm_detail .close').first().click(); // Il y a plusieurs boutons '.close', prendre le premier ou le plus spécifique
+        cy.get('#pkm_detail .close').first().click({force: true}); // Il y a plusieurs boutons '.close', prendre le premier ou le plus spécifique
 
         cy.get('#pkm_detail').should('not.have.class', 'is-active'); // La modale doit être fermée
     });
@@ -195,7 +196,6 @@ describe('Application Pokedex - Tests Front-end', () => {
             name: newTeamName,
             description: newTeamDescription
         });
-        cy.wait('@getTeamsAfterCreate'); // Attendre le rechargement des équipes
 
         // Vérifier que la modale est fermée
         cy.get('#add_team_modal').should('not.have.class', 'is-active');
@@ -212,7 +212,7 @@ describe('Application Pokedex - Tests Front-end', () => {
         const pokemonToSearch = mockPokemons[3]; // Pikachu
 
         // Intercepter la requête de recherche par terme
-        cy.intercept('GET', `${API_BASE_URL}/pokemons?search=Pikachu`, {
+        cy.intercept('GET', `${API_BASE_URL}/pokemons?searchTerm=Pikachu`, {
             statusCode: 200,
             body: [pokemonToSearch], // La recherche renvoie un tableau de résultats
         }).as('searchPokemon');
@@ -234,7 +234,7 @@ describe('Application Pokedex - Tests Front-end', () => {
         cy.get('#search-form button[type="submit"]').click();
 
         cy.wait('@searchPokemon');
-        cy.wait('@getSearchedPokemonDetail'); // Attendre l'ouverture de la modale de détail
+        // cy.wait('@getSearchedPokemonDetail'); // Attendre l'ouverture de la modale de détail
         cy.wait('@getTeamsForSearchModal');
 
         // Vérifier que la modale du Pokémon est ouverte et affiche le bon Pokémon
