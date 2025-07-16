@@ -39,7 +39,7 @@ describe('Application Pokedex - Tests Front-end', () => {
     // --- Tests de navigation et affichage initial ---
 
     it('devrait afficher la page Pokedex par défaut et les cartes Pokémon', () => {
-        cy.url().should('include', '/front/index.html'); // Vérifiez l'URL du front-end
+        cy.url().should('include', '/front/'); // Vérifiez l'URL du front-end
         cy.get('#app .card').should('have.length', mockPokemons.length);
         cy.contains('Bulbasaur').should('be.visible');
         cy.contains('Charmander').should('be.visible');
